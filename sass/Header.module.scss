@@ -1,0 +1,44 @@
+@use "General";
+.header{
+    background: url('/header.jpg') no-repeat;
+    width: 100vw;
+    height:calc(100vh - 60px) ;
+    background-size: cover;
+    text-align: center;
+    h1{
+        @include General.center;
+        font-family: ABanooLight;
+        color: white;
+        z-index: 1;
+        font-size: 50px;
+        font-weight: 100;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        width: 100vw;
+        height:calc(100vh - 60px) ;
+        background-color: rgb(1, 33, 3);
+        opacity: 0.5;
+        left: 0;
+    }
+    .down{
+        position: absolute;
+        color: white;
+        z-index:11;
+        @include General.center($top:90%);
+        font-size: 40px;
+        animation: keyboard-animate 1.4s linear  infinite;
+    }
+}
+
+@keyframes keyboard-animate {
+    0%{
+       margin-top: 0px;
+       opacity: 0;
+    }
+    100%{
+        margin-top: 50px;
+        opacity: 1;
+    }
+}

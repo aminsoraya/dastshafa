@@ -24,3 +24,7 @@ a {
     background: black;
   }
 }
+@font-face {
+  font-family:ABanooLight ;
+  src: url('/ABanooLight.woff2');
+}

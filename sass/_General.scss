@@ -1,0 +1,7 @@
+$backgroundColor: #ece6e6;
+@mixin  center($top:50%){
+    position: absolute;
+    top:$top;
+    left:50%;
+    transform: translate(-50%,-50%);
+}

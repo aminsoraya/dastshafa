@@ -1,0 +1,44 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    background-color:white;
+    z-index: 100;
+    color:green;
+    &::after{
+        content: "";
+        position: absolute;
+        top:0;
+        height: 100%;
+        width: 100%;
+        filter: blur(10px);
+        background-color: rgb(46, 44, 44);
+        opacity: 0.2;
+    }
+    ul.items{
+        left:0;
+        width: 100px;
+        list-style: none;
+        display: flex;
+        position: absolute;
+        top:0;      
+        li:last-child{
+            margin-left: 20px;
+        }
+        li{
+            cursor: pointer;
+        }  
+    }    
+   .logo{
+        right: 0;
+        margin-right: 30px;
+        position: absolute;
+        width: 117px;
+        height: 56px;
+        bottom: 2px; 
+    }
+    
+}

@@ -1,0 +1,10 @@
+@use "General";
+
+.loading{
+    width: 100vw;
+    height:100vh;
+    background-color: General.$backgroundColor ;
+    .control{
+        @include General.center;
+    }
+}
