@@ -28,3 +28,7 @@ a {
   font-family:ABanooLight ;
   src: url('/ABanooLight.woff2');
 }
+@font-face {
+  font-family:IRANSansWeb ;
+  src: url('/IRANSansWeb.woff2');
+}

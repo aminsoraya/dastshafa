@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from "../sass/Loading.module.scss"
 import Navbar from "../components/Navbar"
+import { ThemeProvider, createTheme } from '@mui/material';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -21,10 +22,19 @@ function MyApp({ Component, pageProps }: AppProps) {
         <CircularProgress color='success' className={styles.control} />
       </div>
     }
+
+    let theme = createTheme({
+      typography: {
+        fontFamily: "IRANSansWeb"
+      }
+    })
+
     return (
       <>
-        <Navbar />
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <Component {...pageProps} />
+        </ThemeProvider>
       </>
     )
   }
