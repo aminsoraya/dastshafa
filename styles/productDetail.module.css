@@ -1,0 +1,69 @@
+.image {
+  position: relative;
+  border: 8px solid #315c12;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #1e4512;
+}
+.image .plantTitleText {
+  position: relative;
+  z-index: 13;
+  transform: translateY(8px);
+  color: whitesmoke;
+  font-family: "IRANSansWeb";
+}
+.image .plantTitleBackground {
+  background: linear-gradient(#145104, #023a09);
+  height: 90px;
+  opacity: 0.8;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  z-index: 11;
+  width: max-content;
+  padding-right: 10px;
+  padding-left: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translate(50%);
+}
+.image .plantTitleBackground::after {
+  content: "";
+  top: 0;
+  filter: blur(10px);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: #265717;
+  z-index: 11;
+}
+
+.paragraph {
+  position: relative;
+  text-align: justify;
+}
+.paragraph::after {
+  content: "";
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(90deg, #fff 60%, transparent);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.textSection {
+  width: 100%;
+  background: linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(254, 255, 254) 47%, rgb(221, 227, 224) 100%);
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px grey;
+  font-family: IRANSansWeb;
+  direction: rtl;
+  font-size: 12px;
+}
+
+@media (min-width: 730px) {
+  .item {
+    padding-right: 10px;
+  }
+}

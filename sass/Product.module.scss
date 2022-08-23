@@ -1,0 +1,6 @@
+@use "General";
+
+.FormatDiscountPrice{
+    @include General.discount;
+    padding-left: 30px;
+}

@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid, Container } from "@mui/material"
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -54,7 +51,8 @@ export default function ImgMediaCard() {
                                 تخفیف به ازای تمامی کالاها
                             </Typography>
                             <Typography variant="body2" color="text.secondary" textAlign={'justify'} sx={{ direction: "rtl" }} lineHeight={2}>
-                                تخفیف همواره یکی از جوانب تاثیر گذار یه خرید خوب به حساب میاد ، ما سعی کردیم علاوه بر قیمت مناسب ، تو تمامی محصولاتمون تخفیف رو لحاظ کنیم تا شمامشتریان عزیز خرید خوبی رو تجربه کنند                            </Typography>
+                                تخفیف همواره یکی از جوانب تاثیر گذار یه خرید خوب به حساب میاد ، ما سعی کردیم علاوه بر قیمت مناسب ، تو تمامی محصولاتمون تخفیف رو لحاظ کنیم تا شمامشتریان عزیز خرید خوبی رو تجربه کنند
+                            </Typography>
                         </CardContent>
                     </Card>
                 </Grid>

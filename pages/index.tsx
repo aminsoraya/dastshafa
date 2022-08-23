@@ -3,8 +3,20 @@ import Head from 'next/head'
 import styles from '../sass/Home.module.scss'
 import Header from "../components/Header"
 import AdvertismentCard from "../components/AdvertismentCard"
+import Products from "./products"
+import { AxiosProductInstance } from "../service"
+import { TProductResult } from "../state/actionTypes"
+import { FC } from "react"
+import ProductsSummary from "../components/ProductsSummary"
+import Footer from "../components/Footer"
+import Articles from "../components/Articles"
 
-const Home: NextPage = () => {
+interface IProducts {
+  products: TProductResult[],
+  countAll: number
+}
+
+const Home: FC<IProducts> = ({ products, countAll }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,13 +26,24 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <AdvertismentCard />
-
-
+      <ProductsSummary products={products} countAll={countAll} />
+      <Articles />
       <footer className={styles.footer}>
-
+        <Footer />
       </footer>
     </div>
   )
 }
 
-export default Home
+export default Home;
+export const getServerSideProps = async () => {
+  let { data } = await AxiosProductInstance.get("GetTopFourProducts");
+  let { products, count } = data;
+
+  return {
+    props: {
+      products: products,
+      countAll: count
+    }
+  }
+}

@@ -1,0 +1,67 @@
+.searchItems{
+    position: relative;
+    display: flex;
+    text-align: right;
+    direction: rtl;
+    padding: 5px;
+    .title{
+        display: grid;
+        padding-right: 5px;
+    }
+    .button{
+        position: absolute;
+        left:0;
+        margin-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 83%;
+    }
+}
+.search{
+    position: absolute;
+    right: 100px;
+    
+    input{
+        width: 100%;
+        height: 40px;
+        text-align: right;
+        padding-right: 30px;
+        border: 1px solid #d0cece;
+        color: black;
+        direction: rtl;
+    }
+
+
+    @media (min-width: 730px) {
+        width: 500px;
+    }
+    @media (min-width: 630px) and (max-width:730px)  {
+        width: 400px;
+    }
+    @media (min-width: 530px) and (max-width:630px) {
+        width: 300px;
+    }
+    /* Portrait phones and smaller */
+    @media (max-width: 480px) {
+        width: 200px;
+    }
+    
+    .icon{
+        right: 5px;
+        position: absolute;
+        top: 10px;
+    }
+
+    .searchContent{
+        max-height: 300px;
+        height: fit-content;
+        position: absolute;
+        border: 1px solid #d0cece; 
+        border-top: none;           
+        width: 100%;
+        background: white;
+        overflow-y: scroll;
+        
+    }
+}

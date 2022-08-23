@@ -1,0 +1,5 @@
+.FormatDiscountPrice {
+  color: gray;
+  text-decoration: line-through;
+  padding-left: 30px;
+}

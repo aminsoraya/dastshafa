@@ -1,0 +1,5 @@
+@use "General";
+
+.pragraphEffect{
+    @include General.endOfTextEffect;
+}

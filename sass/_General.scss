@@ -5,3 +5,20 @@ $backgroundColor: #ece6e6;
     left:50%;
     transform: translate(-50%,-50%);
 }
+@mixin discount(){
+    color: gray;
+    text-decoration: line-through;
+}
+
+@mixin endOfTextEffect(){
+    position: relative;
+    &::after{
+        content: "";
+        width:100%;
+        height: 30px;
+        background: linear-gradient(90deg,#fff 60%,transparent);
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}

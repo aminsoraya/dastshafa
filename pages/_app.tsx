@@ -6,6 +6,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import styles from "../sass/Loading.module.scss"
 import Navbar from "../components/Navbar"
 import { ThemeProvider, createTheme } from '@mui/material';
+import { Provider } from "react-redux"
+import { store } from "../state"
+import { ContextProvider } from "../context/ContextProvider"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -30,12 +33,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     })
 
     return (
-      <>
+      <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <Navbar />
-          <Component {...pageProps} />
+          <ContextProvider>
+            <Navbar />
+            <Component {...pageProps} />
+          </ContextProvider>
+
         </ThemeProvider>
-      </>
+      </Provider>
     )
   }
 

@@ -16,7 +16,7 @@
     &::after{
         content: "";
         position: absolute;
-        width: 100vw;
+        width: 100%;
         height:calc(100vh - 60px) ;
         background-color: rgb(1, 33, 3);
         opacity: 0.5;
