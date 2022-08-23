@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, FC } from 'react'
 import styles from "../sass/NavbarSearch.module.scss"
 import Image from 'next/image';
 import SearchIcon from '@mui/icons-material/Search';
@@ -41,7 +41,7 @@ function NavbarSearch() {
         }
         else if (responseData?.products) {
             return responseData?.products?.filter(({ title }) => title.indexOf(textSearch) > -1 && textSearch.length > 0).map((product, index) => {
-                return <div key={index} onClick={() => router.push(`product/${product?.id}/${product?.title}`, undefined, { shallow: true })} style={{ cursor: "pointer" }}>
+                return <div key={index} onClick={() => router.replace(`/product/${product?.id}/${product?.title}`, undefined, { shallow: false })} style={{ cursor: "pointer" }}>
                     <div className={styles.searchItems}>
                         <Image src={product.img} alt={product.title} width={50} height={50} />
                         <div className={styles.title}>
@@ -62,7 +62,7 @@ function NavbarSearch() {
         <div className={styles.search} >
             <SearchIcon className={styles.icon} />
             <input type="search" onChange={(e) => setTextSearch(e.target.value)} onKeyDown={toggleScroll} name="" id="" placeholder='جستجو ...' />
-            <div className={styles.searchContent} style={{ display: ((responseData?.products?.length ?? 0) > 0) ? "block" : "none" }}>
+            <div className={styles.searchContent} style={{ display: ((responseData?.products?.length ?? 0) > 0 || responseData?.notFound) ? "block" : "none" }}>
                 {ConditionlRendering()}
             </div>
         </div>

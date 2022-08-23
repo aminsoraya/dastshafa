@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
-const baseURL = 'https://service.dastshafa.ir/api/Product'
+const baseURL = 'http://localhost:5056/api/Product'
 const config: AxiosRequestConfig = {
   baseURL,
 }

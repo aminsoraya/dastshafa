@@ -7,6 +7,7 @@ interface IState {
 const initialState = {
   cart: [],
 }
+
 const CartReducer = (
   state: IState = initialState,
   action: CartTypeAction,

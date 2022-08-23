@@ -7,8 +7,9 @@ import styles from "../sass/Loading.module.scss"
 import Navbar from "../components/Navbar"
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Provider } from "react-redux"
-import { store } from "../state"
+import { store, persistor } from "../state"
 import { ContextProvider } from "../context/ContextProvider"
+import { PersistGate } from 'redux-persist/integration/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -34,13 +35,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <ContextProvider>
-            <Navbar />
-            <Component {...pageProps} />
-          </ContextProvider>
-
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <ContextProvider>
+              <Navbar />
+              <Component {...pageProps} />
+            </ContextProvider>
+          </ThemeProvider>
+        </PersistGate>
       </Provider>
     )
   }

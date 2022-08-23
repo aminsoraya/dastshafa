@@ -11,8 +11,6 @@ import useSelectorHandler from "../hooks/useSelectorHandler"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import useActionHandler from '../hooks/useActionHandler';
 import NavbarSearch from './NavbarSearch';
-import { LoaderImg } from "../common"
-
 
 function Navbar() {
     const router = useRouter();
@@ -41,7 +39,6 @@ function Navbar() {
                                                 alt={title}
                                                 width={100}
                                                 height={100}
-                                                //loader={LoaderImg}
                                                 layout="responsive"
                                             />
                                         </div>
@@ -87,7 +84,6 @@ function Navbar() {
                     layout="fill"
                     objectFit="contain"
                     alt="logo"
-                // loader={LoaderImg}
                 />
             </div>
         </div>
