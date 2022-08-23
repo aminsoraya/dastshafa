@@ -26,11 +26,11 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
 
     //Snackbar
     const [addToCartMessage, setAddToCartMessage] = useState<IAddToCartVariable>()
-    const [addToCartOpen, setAddToCartOpen] = useState<boolean>()
+    const [addToCartOpen, setAddToCartOpen] = useState<boolean>(false)
 
     //Snackbar
     const [textMoreInfo, setTextMoreInfo] = useState<IFullScreenDialogVariable>()
-    const [textMoreInfoOpen, setTextMoreInfoOpen] = useState<boolean>()
+    const [textMoreInfoOpen, setTextMoreInfoOpen] = useState<boolean>(false)
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         if (typeof newValue === 'number') {
