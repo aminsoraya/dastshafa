@@ -22,7 +22,25 @@ const CalculateDiscount = (price: number, discount: number) => {
   let discountPrice: number = price * (discount / 100)
   return price - discountPrice
 }
-export { NumberCommaSeperator, ChangeEnNumberToPer, CalculateDiscount }
+
+const LoaderImg = ({
+  src,
+  width,
+  quality,
+}: {
+  src: string
+  width: number
+  quality: number
+}) => {
+  return `${src}?w=${width}&q=${quality || 100}`
+}
+
+export {
+  NumberCommaSeperator,
+  ChangeEnNumberToPer,
+  CalculateDiscount,
+  LoaderImg,
+}
 
 export interface IAddToCartVariable {
   text: string | undefined

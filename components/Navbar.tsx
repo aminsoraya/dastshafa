@@ -11,10 +11,9 @@ import useSelectorHandler from "../hooks/useSelectorHandler"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import useActionHandler from '../hooks/useActionHandler';
 import NavbarSearch from './NavbarSearch';
+import { LoaderImg } from "../common"
 
-const myLoader = ({ src }: { src: string }) => {
-    return src;
-}
+
 function Navbar() {
     const router = useRouter();
     const fomratMoney = flow(NumberCommaSeperator, ChangeEnNumberToPer);
@@ -42,7 +41,7 @@ function Navbar() {
                                                 alt={title}
                                                 width={100}
                                                 height={100}
-                                                //loader={loaderImg}
+                                                //loader={LoaderImg}
                                                 layout="responsive"
                                             />
                                         </div>
@@ -88,7 +87,7 @@ function Navbar() {
                     layout="fill"
                     objectFit="contain"
                     alt="logo"
-                    loader={myLoader}
+                // loader={LoaderImg}
                 />
             </div>
         </div>

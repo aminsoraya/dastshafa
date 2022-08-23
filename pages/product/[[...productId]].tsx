@@ -11,6 +11,8 @@ import FullScreenDialog from "../../components/FullScreenDialog"
 import useActionHandler from "../../hooks/useActionHandler"
 import SnakBar from "../../components/Snackbar"
 import BackToProductButton from "../../components/BackToProductButton"
+import { LoaderImg } from "../../common"
+
 
 interface TProduct {
     product: ICartResult
