@@ -41,7 +41,7 @@ function NavbarSearch() {
         }
         else if (responseData?.products) {
             return responseData?.products?.filter(({ title }) => title.indexOf(textSearch) > -1 && textSearch.length > 0).map((product, index) => {
-                return <div key={index} onClick={() => router.push(`product/${product?.id}/${product?.title}`, null, { shallow: true })} style={{ cursor: "pointer" }}>
+                return <div key={index} onClick={() => router.push(`product/${product?.id}/${product?.title}`, undefined, { shallow: true })} style={{ cursor: "pointer" }}>
                     <div className={styles.searchItems}>
                         <Image src={product.img} alt={product.title} width={50} height={50} />
                         <div className={styles.title}>
