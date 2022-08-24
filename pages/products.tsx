@@ -18,7 +18,7 @@ function Products() {
     let { loading, data } = useSelectorHandler(state => state.products);
     const router = useRouter();
     const [sort, setSort] = useState<Sort | null>()
-    const [product, setProduct] = useState<TProductResult[]>();
+
 
     let mounted = true;
     useEffect(() => {

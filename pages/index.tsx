@@ -3,13 +3,15 @@ import Head from 'next/head'
 import styles from '../sass/Home.module.scss'
 import Header from "../components/Header"
 import AdvertismentCard from "../components/AdvertismentCard"
-import Products from "./products"
 import { AxiosProductInstance } from "../service"
 import { TProductResult } from "../state/actionTypes"
-import { FC } from "react"
+import { FC, useRef, useState, useEffect, RefObject } from "react"
 import ProductsSummary from "../components/ProductsSummary"
 import Footer from "../components/Footer"
-import Articles from "../components/Articles"
+import useOnScreen from "../hooks/useOnScreen"
+import dynamic from "next/dynamic"
+
+const Articles = dynamic(() => import("../components/Articles"));
 
 interface IProducts {
   products: TProductResult[],
@@ -17,6 +19,16 @@ interface IProducts {
 }
 
 const Home: FC<IProducts> = ({ products, countAll }) => {
+
+  const articlesRef = useRef<HTMLDivElement>();
+  const articlesRefValue = useOnScreen(articlesRef);
+  const [isArticlesRef, setIsArticlesRef] = useState(false);
+
+  useEffect(() => {
+    if (!isArticlesRef)
+      setIsArticlesRef(articlesRefValue);
+  }, [articlesRefValue])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +39,10 @@ const Home: FC<IProducts> = ({ products, countAll }) => {
       <Header />
       <AdvertismentCard />
       <ProductsSummary products={products} countAll={countAll} />
-      <Articles />
+      <div ref={articlesRef as RefObject<HTMLDivElement>}>
+        {articlesRefValue && <Articles />}
+      </div>
+
       <footer className={styles.footer}>
         <Footer />
       </footer>

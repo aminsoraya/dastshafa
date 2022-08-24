@@ -8,7 +8,6 @@ import styles from "../sass/Articles.module.scss"
 import FullScreenDialog from "./FullScreenDialog"
 import { IFullScreenDialogVariable, IArticle } from '../common'
 import { AxiosProductInstance } from '../service';
-import { GetServerSideProps } from 'next';
 
 const Articles: React.FC = () => {
     const [textMoreInfo, setTextMoreInfo] = React.useState<IFullScreenDialogVariable>()

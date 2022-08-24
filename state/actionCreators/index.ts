@@ -1,7 +1,6 @@
 import React from 'react'
 import { AxiosProductInstance } from '../../service'
 import { Dispatch } from 'redux'
-import { useDispatch } from 'react-redux'
 import {
   ProductTypeAction,
   ICartResult,
