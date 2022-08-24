@@ -32,7 +32,7 @@ const CardProduct: FC<productProps> = ({ product, index }) => {
                     component="img"
                     height="250"
                     image={product?.img}
-                    alt="green iguana"
+                    alt={product.title}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" sx={{ direction: "rtl" }} component="div" display={'flex'} justifyContent="space-between">
