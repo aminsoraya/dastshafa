@@ -35,7 +35,7 @@ function NavbarSearch() {
 
     const ConditionlRendering = () => {
         if (responseData?.notFound) {
-            return <Alert variant='filled' color='error' dir='rtl'>
+            return <Alert variant='filled' severity='error' dir='rtl' >
                 موردی یافت نشد
             </Alert>
         }
