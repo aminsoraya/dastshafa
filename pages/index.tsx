@@ -10,6 +10,8 @@ import ProductsSummary from "../components/ProductsSummary"
 import Footer from "../components/Footer"
 import useOnScreen from "../hooks/useOnScreen"
 import dynamic from "next/dynamic"
+import { Grid } from "@mui/material"
+import SkeletonLoading from '../components/SkeletonLoading'
 
 const Articles = dynamic(() => import("../components/Articles"));
 
@@ -22,11 +24,13 @@ const Home: FC<IProducts> = ({ products, countAll }) => {
 
   const articlesRef = useRef<HTMLDivElement>();
   const articlesRefValue = useOnScreen(articlesRef);
-  const [isArticlesRef, setIsArticlesRef] = useState(false);
+  const isArticlesRef = useRef(false);
 
   useEffect(() => {
-    if (!isArticlesRef)
-      setIsArticlesRef(articlesRefValue);
+    if (!isArticlesRef.current) {
+      console.log("fire")
+      isArticlesRef.current = true;
+    }
   }, [articlesRefValue])
 
   return (
@@ -40,7 +44,13 @@ const Home: FC<IProducts> = ({ products, countAll }) => {
       <AdvertismentCard />
       <ProductsSummary products={products} countAll={countAll} />
       <div ref={articlesRef as RefObject<HTMLDivElement>}>
-        {articlesRefValue && <Articles />}
+        {isArticlesRef.current && <Articles />}
+        {
+          !isArticlesRef.current &&
+          <Grid container>
+            <SkeletonLoading itemCount={3} />
+          </Grid>
+        }
       </div>
 
       <footer className={styles.footer}>
