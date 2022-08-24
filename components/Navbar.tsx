@@ -53,15 +53,16 @@ function Navbar() {
                                         </div>
                                     </div>
                                     <Divider />
-                                    <Typography variant='body2' sx={{ dir: "rtl", textAlign: "right", mt: 1 }}>
-                                        جمع کل {fomratMoney(FullPaymentPrice.toString())} تومان
-                                    </Typography>
-                                    <Button fullWidth color="success" sx={{ mt: 2 }} variant='contained' onClick={() => alert("در دست ساخت")}>
-                                        پرداخت آنلاین
-                                    </Button>
+
                                 </div>
                             })
                         }
+                        <Typography variant='body2' sx={{ dir: "rtl", textAlign: "right", mt: 1 }}>
+                            جمع کل {fomratMoney(FullPaymentPrice.toString())} تومان
+                        </Typography>
+                        <Button fullWidth color="success" sx={{ mt: 2 }} variant='contained' onClick={() => alert("در دست ساخت")}>
+                            پرداخت آنلاین
+                        </Button>
                         {cart?.length == 0 &&
                             <Alert severity="error">
                                 <AlertTitle></AlertTitle>
