@@ -12,6 +12,7 @@
 }
 .navbar ul.items {
   left: 0;
+  padding-left: 15px;
   width: 100px;
   list-style: none;
   display: flex;
