@@ -62,7 +62,7 @@ function Navbar() {
                             <Typography variant='body2' sx={{ dir: "rtl", textAlign: "right", mt: 1 }}>
                                 جمع کل {fomratMoney(FullPaymentPrice.toString())} تومان
                             </Typography>
-                            <Button fullWidth color="success" sx={{ mt: 2 }} variant='contained' onClick={() => alert("در دست ساخت")}>
+                            <Button fullWidth color="success" sx={{ mt: 2 }} variant='contained' onClick={() => router.push("login", undefined, { shallow: true })}>
                                 پرداخت آنلاین
                             </Button></>
                         }
@@ -77,7 +77,7 @@ function Navbar() {
                 <li className={styles.user}>
                     <Person />
                     <div className={styles.dropDown}>
-                        <Button variant='outlined' color='primary' size='small' fullWidth onClick={() => alert("در دست ساخت")}>ورود| ثبت نام</Button>
+                        <Button variant='outlined' color='primary' size='small' fullWidth onClick={() => router.push("login", undefined, { shallow: true })}>ورود| ثبت نام</Button>
                     </div>
                 </li>
             </ul>

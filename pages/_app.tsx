@@ -14,6 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const ExcludePath = ["/login"]
 
   useEffect(() => {
     router.events.on("routeChangeStart", () => setLoading(true))
@@ -38,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
             <ContextProvider>
-              <Navbar />
+              {!ExcludePath.includes(router.pathname) && <Navbar />}
               <Component {...pageProps} />
             </ContextProvider>
           </ThemeProvider>
