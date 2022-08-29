@@ -1,22 +1,29 @@
 import React, { useReducer, useState } from 'react'
 import styles from "../sass/Login.module.scss"
 import { TextField, Card, Grid, InputAdornment, Typography, Button, Input } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import BackToProductButton from '../components/BackToProductButton';
 import Image from "next/image"
 import { useRouter } from 'next/router';
-import { ChangeEnNumberToPer } from "../common"
-
-const handleMobile = (state: {}, action: string): {} => {
-    return { ...state, action };
-}
+import { IsNumberEntered } from "../common"
 
 function Login() {
     const router = useRouter();
     const [mobile, setMobile] = useState("");
+    const [mobileValid, setMobileValid] = useState<boolean | undefined>();
 
+    const handleKeyDown = (event: any) => {
+        let { keyCode } = event;
+        let pattern = /^\d{8}$/
 
+        if (!IsNumberEntered(keyCode))
+            event.preventDefault();
 
+        //check entered text is number and in proper length
+        if (pattern.test(mobile)) {
+            setMobileValid(true);
+        }
+        else
+            setMobileValid(false)
+    }
     return (
         <div className={styles.main}>
             <Card variant="outlined" className={styles.card}>
@@ -27,6 +34,8 @@ function Login() {
                                 layout="fill"
                                 objectFit="contain"
                                 alt="logo"
+                                onClick={() => router.push("/")}
+                                style={{ cursor: "pointer" }}
                             />
                         </div>
                     </Grid>
@@ -38,8 +47,10 @@ function Login() {
                             type="text"
                             fullWidth
                             placeholder='164564606'
-
+                            onKeyDown={handleKeyDown}
                             autoComplete="false"
+                            error={!mobileValid}
+                            helperText={!mobileValid && "شماره موبایل وارد شده صحیح نیست"}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">09</InputAdornment>,
                             }}

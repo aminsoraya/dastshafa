@@ -18,12 +18,30 @@ const ChangeEnNumberToPer = (num: any) => {
     .replace(/9/g, '۹')
 }
 
+const IsNumberEntered = (keyCode: any): boolean => {
+  if (
+    (keyCode < 48 || keyCode > 57) &&
+    (keyCode < 96 || keyCode > 105) &&
+    keyCode != 8 &&
+    keyCode != 46 &&
+    keyCode != 39 &&
+    keyCode != 37
+  )
+    return false
+  return true
+}
+
 const CalculateDiscount = (price: number, discount: number) => {
   let discountPrice: number = price * (discount / 100)
   return price - discountPrice
 }
 
-export { NumberCommaSeperator, ChangeEnNumberToPer, CalculateDiscount }
+export {
+  NumberCommaSeperator,
+  ChangeEnNumberToPer,
+  CalculateDiscount,
+  IsNumberEntered,
+}
 
 export interface IAddToCartVariable {
   text: string | undefined
