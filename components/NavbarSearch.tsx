@@ -48,7 +48,7 @@ function NavbarSearch() {
             return responseData?.products?.filter(({ title }) => title.indexOf(textSearch) > -1 && textSearch.length > 0).map((product, index) => {
                 return <div key={index} onClick={() => router.replace(`/product/${product?.id}/${product?.title}`, undefined, { shallow: false })} style={{ cursor: "pointer" }}>
                     <div className={styles.searchItems}>
-                        <Image src={product.img} alt={product.title} width={50} height={50} />
+                        <Image src={product.img} alt={product.title} loading="eager" width={50} height={50} />
                         <div className={styles.title}>
                             <Typography variant='caption' color={'black'} >{product.title}</Typography>
                             <Typography variant='caption' color={'#8d8d93'} >{fomratMoney(CalculateDiscount(product.price, product.discount).toString())} تومان</Typography>
