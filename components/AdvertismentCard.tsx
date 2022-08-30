@@ -11,8 +11,8 @@ export default function ImgMediaCard() {
     return (
         <Container sx={{ pt: 10 }}>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                <Grid item xs={12} sm={6} md={4} >
+                    <Card sx={{ background: "#f9f3f3" }}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" align='center' component="div">
                                 <VerifiedIcon sx={{ fontSize: 70 }} color="success" />
@@ -26,8 +26,8 @@ export default function ImgMediaCard() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                <Grid item xs={12} sm={6} md={4} >
+                    <Card sx={{ background: "#f9f3f3" }}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" align='center' component="div">
                                 <ScaleIcon sx={{ fontSize: 70 }} color="success" />
@@ -42,7 +42,7 @@ export default function ImgMediaCard() {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card>
+                    <Card sx={{ background: "#f9f3f3" }}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" align='center' component="div">
                                 <PaidIcon sx={{ fontSize: 70 }} color="success" />
