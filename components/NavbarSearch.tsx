@@ -18,6 +18,7 @@ interface ISearchResponse {
 }
 function NavbarSearch() {
     const [textSearch, setTextSearch] = useState("")
+    const [focus, setFocus] = useState(false);
     const loading = useRef(false);
     const [responseData, setResponseData] = useState<ISearchResponse>();
     const { toggleScroll } = useContext(Context)
@@ -63,10 +64,15 @@ function NavbarSearch() {
         }
     }
     return (
-        <div className={styles.search} >
+        <div className={`${styles.search} ${(textSearch.trim().length > 0) ? styles.outSearch : styles.inSearch}`} >
             <SearchIcon className={styles.icon} />
-            <input type="search" onChange={(e) => setTextSearch(e.target.value)} onKeyDown={toggleScroll} name="" id="" placeholder='جستجو ...' />
-            <div className={styles.searchContent} style={{ display: ((responseData?.products?.length ?? 0) > 0 || responseData?.notFound) ? "block" : "none" }}>
+            <input type="search"
+                onBlur={() => setFocus(false)}
+                onFocus={() => setFocus(true)}
+                onChange={(e) => setTextSearch(e.target.value)}
+                onKeyDown={toggleScroll}
+                name="" id="" placeholder='جستجو ...' />
+            <div className={styles.searchContent} style={textSearch.trim().length > 0 ? { display: "block" } : { display: "none" }} >
                 {ConditionlRendering()}
             </div>
         </div>
