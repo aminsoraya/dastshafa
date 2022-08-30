@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import { IProductResult } from "../../state/actionTypes"
+import { ICartResult } from "../../state/actionTypes"
 import { GetServerSideProps } from 'next'
 import { AxiosProductInstance } from "../../service"
 import { Grid, Typography, Button, Slider, Container } from "@mui/material"
@@ -14,7 +14,7 @@ import BackToProductButton from "../../components/BackToProductButton"
 import { FindOptions, MongoClient, WithId } from "mongodb"
 
 interface IProduct {
-    product: IProductResult
+    product: ICartResult
 }
 
 const ProductDetail: React.FC<IProduct> = ({ product }) => {
@@ -187,7 +187,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const db = client.db();
     const productResult = await db
-        .collection<IProductResult>("Plants")
+        .collection<ICartResult>("Plants")
         .findOne({ id });
 
     client.close();
