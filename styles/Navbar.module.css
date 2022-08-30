@@ -8,7 +8,7 @@
   background-color: rgb(255, 255, 255);
   z-index: 100;
   color: green;
-  border-bottom: solid 1px #c8c4c4;
+  box-shadow: 0 2px 8px 1px rgba(64, 60, 67, 0.24);
 }
 .navbar ul.items {
   left: 0;

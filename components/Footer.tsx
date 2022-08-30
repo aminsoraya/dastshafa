@@ -11,9 +11,9 @@ function Footer() {
             <Grid container textAlign="center">
                 <Grid item xs={12} md={12} sx={{ mt: 2 }}>
                     <Typography variant='overline'>
-                        <GoogleIcon sx={{ ml: 2, color: "gray" }} />
+                        <GoogleIcon sx={{ mr: 2, color: "gray" }} />
                         <WhatsAppIcon sx={{ color: "gray" }} />
-                        <InstagramIcon sx={{ mr: 2, color: "gray" }} />
+                        <InstagramIcon sx={{ ml: 2, color: "gray" }} />
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={12} spacing={2} >
