@@ -18,15 +18,14 @@ interface ISearchResponse {
 }
 function NavbarSearch() {
     const [textSearch, setTextSearch] = useState("")
-    const [focus, setFocus] = useState(false);
-    const loading = useRef(false);
+    const [loading, setLoading] = useState(false);
     const [responseData, setResponseData] = useState<ISearchResponse>();
     const { toggleScroll } = useContext(Context)
     const fomratMoney = flow(NumberCommaSeperator, ChangeEnNumberToPer);
     const router = useRouter();
 
     useEffect(() => {
-        loading.current = true;
+        setLoading(true);
         SearchByTitle()
     }, [textSearch])
 
@@ -34,10 +33,10 @@ function NavbarSearch() {
         await AxiosProductInstance
             .post<ISearchResponse>("searchProductByTitle", { term: textSearch }, { headers: { 'Content-Type': 'application/json' } })
             .then(({ data: { products, notFound } }) => { setResponseData({ products, notFound }) })
-            .then(() => loading.current = false);
+            .then(() => setLoading(false));
     }
     const ConditionlRendering = () => {
-        if (loading.current) {
+        if (loading) {
             return <CircularProgress color="inherit" />
         }
         else if (responseData?.notFound) {
@@ -67,8 +66,6 @@ function NavbarSearch() {
         <div className={`${styles.search} ${(textSearch.trim().length > 0) ? styles.outSearch : styles.inSearch}`} >
             <SearchIcon className={styles.icon} />
             <input type="search"
-                onBlur={() => setFocus(false)}
-                onFocus={() => setFocus(true)}
                 onChange={(e) => setTextSearch(e.target.value)}
                 onKeyDown={toggleScroll}
                 name="" id="" placeholder='جستجو ...' />
