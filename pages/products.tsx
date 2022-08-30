@@ -7,7 +7,7 @@ import SkeletonLoading from '../components/SkeletonLoading';
 import { useRouter } from 'next/router';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { ChangeEnNumberToPer } from "../common"
-import { TProductResult } from '../state/actionTypes';
+import { IProductResult } from '../state/actionTypes';
 
 enum Sort {
     ASC = "asc",

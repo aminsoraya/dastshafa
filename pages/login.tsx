@@ -1,12 +1,15 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import styles from "../sass/Login.module.scss"
 import { TextField, Card, Grid, InputAdornment, Typography, Button, Input } from '@mui/material';
 import Image from "next/image"
 import { useRouter } from 'next/router';
 import { IsNumberEntered } from "../common"
+import { AxiosProductInstance } from '../service';
+import { FindOptions, MongoClient, WithId } from "mongodb"
+import { IProductResult } from "../state/actionTypes"
+
 
 function Login() {
-    const router = useRouter();
     const [mobile, setMobile] = useState("");
     const [mobileValid, setMobileValid] = useState<boolean | undefined>();
 

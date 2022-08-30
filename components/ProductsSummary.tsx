@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import { Typography, Container, Divider, Grid, Button } from '@mui/material';
-import { TProductResult } from "../state/actionTypes"
+import { IProductResult } from "../state/actionTypes"
 import CardProduct from "../components/CardProduct"
 import SkeletonLoading from "../components/SkeletonLoading"
 import { ChangeEnNumberToPer } from "../common"
 import Link from 'next/link'
 
 interface IProducts {
-    products: TProductResult[],
+    products: IProductResult[],
     countAll: number
 }
 const ProductsSummary: FC<IProducts> = ({ products, countAll }) => {

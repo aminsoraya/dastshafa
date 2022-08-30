@@ -7,14 +7,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import styles from "../sass/Product.module.scss"
 import { NumberCommaSeperator, ChangeEnNumberToPer, CalculateDiscount } from "../common"
-import { TProductResult } from "../state/actionTypes"
+import { IProductResult } from "../state/actionTypes"
 import { flow } from "lodash/fp"
 import Badge from '@mui/material/Badge';
 import Grow from '@mui/material/Grow';
 import { useRouter } from "next/router"
 
 type productProps = {
-    product: TProductResult
+    product: IProductResult
     index: number
 }
 

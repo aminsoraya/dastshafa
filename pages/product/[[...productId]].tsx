@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react'
-import { ICartResult } from "../../state/actionTypes"
+import React, { useState, useMemo, useEffect } from 'react'
+import { IProductResult } from "../../state/actionTypes"
 import { GetServerSideProps } from 'next'
 import { AxiosProductInstance } from "../../service"
 import { Grid, Typography, Button, Slider, Container } from "@mui/material"
@@ -11,14 +11,15 @@ import FullScreenDialog from "../../components/FullScreenDialog"
 import useActionHandler from "../../hooks/useActionHandler"
 import SnakBar from "../../components/Snackbar"
 import BackToProductButton from "../../components/BackToProductButton"
+import { FindOptions, MongoClient, WithId } from "mongodb"
 
-
-interface TProduct {
-    product: ICartResult
+interface IProduct {
+    product: IProductResult
 }
 
-const ProductDetail: React.FC<TProduct> = ({ product }) => {
+const ProductDetail: React.FC<IProduct> = ({ product }) => {
     const { img, title, benefical, price, description, weight, discount } = product;
+
     const formatPrice = flow(NumberCommaSeperator, ChangeEnNumberToPer)
     const [weightSteper, setWeightSteper] = useState(0.000);
 
@@ -38,6 +39,7 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
             setWeightSteper(newValue);
         }
     };
+
     function valueLabelFormat(value: number) {
         const units = {
             GE: 'گرم',
@@ -48,8 +50,8 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
 
     let paymentPrice = useMemo(() => {
         let calcDiscountPrice = CalculateDiscount(
-            price,
-            discount
+            price!,
+            discount!
         );
         let paymentUnit = (weightSteper * 1000) / 100;
         return weightSteper == 0 ? 0 : (calcDiscountPrice * paymentUnit).toFixed(0);
@@ -60,7 +62,9 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
             setAddToCartMessage({ severity: "error", text: "ابتدا مقدار مورد نیاز را تعیین کنید" })
             setAddToCartOpen(true);
         } else {
-            product.discountPrice = paymentPrice as number;
+            if (product)
+                product.discountPrice = paymentPrice as number;
+
             AddToCart(product);
             setAddToCartMessage({ severity: "success", text: "با موفقیت به سبد خرید اضافه شد" })
             setAddToCartOpen(true);
@@ -71,6 +75,8 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
         setTextMoreInfo({ text, title });
         setTextMoreInfoOpen(true);
     }
+
+    console.log(product);
 
     return <>
         <FullScreenDialog open={textMoreInfoOpen} text={textMoreInfo?.text} title={textMoreInfo?.title} handleClose={() => setTextMoreInfoOpen(false)} />
@@ -94,7 +100,7 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
                         </Grid>
                         <Grid lg={10} xs={9} sx={{ position: "relative" }}>
                             <Typography variant="caption" component="div" textAlign={"justify"} lineHeight={3} maxHeight="210px" overflow={"hidden"} className={styles.paragraph}>
-                                {description.substring(0, 270)}
+                                {description?.substring(0, 270)}
                             </Typography>
                             <Button variant='text' onClick={() => ShowOpenDialog({ text: description, title: "تعریف" })} size="small" sx={{ position: "absolute", left: 0, bottom: 0 }} >بیشتر بخوانید</Button>
                         </Grid>
@@ -170,14 +176,46 @@ const ProductDetail: React.FC<TProduct> = ({ product }) => {
 }
 
 export default ProductDetail
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    let [productId] = context?.params?.productId as string[];
 
-    let { data } = await AxiosProductInstance.post("FetchProductById", { productId });
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    let [id]: any = context?.params?.productId as string[];
+
+    const client = await MongoClient.connect(
+        "mongodb+srv://admin:0izndCAkQc7254tD@cluster0.i2pejum.mongodb.net/dastshafa"
+    );
+
+    const db = client.db();
+    const productResult = await db
+        .collection<IProductResult>("Plants")
+        .findOne({ id });
+
+    client.close();
+
+    ////const product = {
+    // id: productResult?.id,
+    //     img: productResult?.img,
+    //         title: productResult?.title,
+    //             description: productResult?.description,
+    //                 benefical: productResult?.benefical,
+    //                     weight: productResult?.weight,
+    //                         price: productResult?.price,
+    //                             discount: productResult?.discount
+    // //};
 
     return {
         props: {
-            product: data,
+            product: {
+                id: productResult?.id,
+                img: productResult?.img,
+                title: productResult?.title,
+                description: productResult?.description,
+                benefical: productResult?.benefical,
+                weight: productResult?.weight,
+                price: productResult?.price,
+                discount: productResult?.discount
+            }
+
         }
     };
 }

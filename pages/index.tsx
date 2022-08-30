@@ -4,7 +4,7 @@ import styles from '../sass/Home.module.scss'
 import Header from "../components/Header"
 import AdvertismentCard from "../components/AdvertismentCard"
 import { AxiosProductInstance } from "../service"
-import { TProductResult } from "../state/actionTypes"
+import { IProductResult } from "../state/actionTypes"
 import { FC, useRef, useState, useEffect, RefObject } from "react"
 import ProductsSummary from "../components/ProductsSummary"
 import Footer from "../components/Footer"
@@ -12,11 +12,12 @@ import useOnScreen from "../hooks/useOnScreen"
 import dynamic from "next/dynamic"
 import { Grid } from "@mui/material"
 import SkeletonLoading from '../components/SkeletonLoading'
+import { MongoClient, WithId, Document, ObjectId } from "mongodb";
 
 const Articles = dynamic(() => import("../components/Articles"));
 
 interface IProducts {
-  products: TProductResult[],
+  products: IProductResult[],
   countAll: number
 }
 
@@ -61,14 +62,33 @@ const Home: FC<IProducts> = ({ products, countAll }) => {
 }
 
 export default Home;
+
+
 export const getServerSideProps = async () => {
-  let { data } = await AxiosProductInstance.get("GetTopFourProducts");
-  let { products, count } = data;
+  const client = await MongoClient.connect(
+    "mongodb+srv://admin:0izndCAkQc7254tD@cluster0.i2pejum.mongodb.net/dastshafa"
+  );
+
+  const db = client.db();
+  const countAll = await db.collection("Plants").count();
+
+  const productResult = await db
+    .collection<IProductResult>("Plants")
+    .find()
+    .limit(4)
+    .toArray();
+
+
+  const products = productResult.map(({ id, img, title, description, benefical, weight, price, discount }: IProductResult) => ({
+    id, img, title, description, benefical, weight, price, discount
+  }));
+
+  client.close();
 
   return {
     props: {
-      products: products,
-      countAll: count
+      products,
+      countAll
     }
   }
 }

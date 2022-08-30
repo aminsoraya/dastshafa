@@ -8,6 +8,7 @@ import styles from "../sass/Articles.module.scss"
 import FullScreenDialog from "./FullScreenDialog"
 import { IFullScreenDialogVariable, IArticle } from '../common'
 import { AxiosProductInstance } from '../service';
+import SkeletonLoading from './SkeletonLoading';
 
 const Articles: React.FC = () => {
     const [textMoreInfo, setTextMoreInfo] = React.useState<IFullScreenDialogVariable>()
@@ -17,7 +18,7 @@ const Articles: React.FC = () => {
     React.useEffect(() => {
         (async () => {
             await AxiosProductInstance
-                .get<IArticle[]>("FetchArticles")
+                .get<IArticle[]>("fetchArticles")
                 .then(({ data }) => setArticles(data))
         })()
     }, [])
@@ -26,6 +27,40 @@ const Articles: React.FC = () => {
         let findArticle = [...articles].find(item => item.id == id);
         setTextMoreInfo({ text: findArticle?.body, title: findArticle?.title })
         setTextMoreInfoOpen(true)
+    }
+
+    const ConditionalRendering = () => {
+        if (articles.length == 0) {
+            return <SkeletonLoading itemCount={3} lg={4} md={4} />
+        }
+        else {
+            return articles?.map(({ id, date, body, title, img }, index) => {
+                return <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
+                    <Card>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image={img}
+                            alt={title}
+                        />
+                        <CardContent>
+                            <Typography variant="h6" component="div">
+                                {title}
+                            </Typography>
+                            <Typography variant="caption" component="div" textAlign={"justify"} sx={{ mt: 2 }} lineHeight={2} className={styles.pragraphEffect}>
+                                {body?.substring(0, 230)}
+                            </Typography>
+
+                            <Typography variant="caption" component="div" dir='ltr' color="red">
+                                <Button variant='text' color='error' onClick={() => ReadArticle(id)}>
+                                    خواندن مقاله
+                                </Button>
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            })
+        }
     }
 
     return (
@@ -38,32 +73,7 @@ const Articles: React.FC = () => {
                 <Divider />
                 <Grid container sx={{ mt: 4 }} spacing={2}>
                     {
-                        articles?.map(({ id, date, body, title, img }, index) => {
-                            return <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
-                                <Card>
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        image={img}
-                                        alt={title}
-                                    />
-                                    <CardContent>
-                                        <Typography variant="h6" component="div">
-                                            {title}
-                                        </Typography>
-                                        <Typography variant="caption" component="div" textAlign={"justify"} sx={{ mt: 2 }} lineHeight={2} className={styles.pragraphEffect}>
-                                            {body?.substring(0, 230)}
-                                        </Typography>
-
-                                        <Typography variant="caption" component="div" dir='ltr' color="red">
-                                            <Button variant='text' color='error' onClick={() => ReadArticle(id)}>
-                                                خواندن مقاله
-                                            </Button>
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        })
+                        ConditionalRendering()
                     }
                 </Grid>
             </Container>

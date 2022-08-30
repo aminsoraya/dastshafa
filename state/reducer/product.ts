@@ -1,10 +1,10 @@
 import { ProductActionTypeEnum } from '../actionEnumTypes'
 import { ProductTypeAction } from '../actionTypes'
-import { TProductResult } from '../actionTypes'
+import { IProductResult } from '../actionTypes'
 
 interface IState {
   loading: boolean
-  data: TProductResult[]
+  data: IProductResult[]
   error: string
   notFound?: boolean
 }

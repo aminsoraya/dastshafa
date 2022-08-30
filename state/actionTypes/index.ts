@@ -16,9 +16,8 @@ interface IProduct {
   discount: number
 }
 
-export type TProductResult = Omit<IProduct, 'date' | 'unit' | 'rate'>
-
-export interface ICartResult extends TProductResult {
+export interface IProductResult
+  extends Omit<IProduct, 'date' | 'unit' | 'rate'> {
   discountPrice: number
 }
 
@@ -27,7 +26,7 @@ interface ILoadingAction {
 }
 interface IDataAction {
   type: ProductActionTypeEnum.DATA
-  payload: TProductResult[]
+  payload: IProductResult[]
 }
 interface IErrrorAction {
   type: ProductActionTypeEnum.ERROR
@@ -46,7 +45,7 @@ export type ProductTypeAction =
 //Cart
 export interface IActionAddToCart {
   type: CartActionTypeEnum.ADD_TO_CART
-  payload: ICartResult
+  payload: IProductResult
 }
 
 export interface IActionRemoveFromCart {

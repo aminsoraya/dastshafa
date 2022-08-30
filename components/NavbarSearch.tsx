@@ -1,40 +1,45 @@
-import React, { useContext, useState, useEffect, FC } from 'react'
+import React, { useContext, useState, useEffect, FC, useRef } from 'react'
 import styles from "../sass/NavbarSearch.module.scss"
 import Image from 'next/image';
 import SearchIcon from '@mui/icons-material/Search';
 import Context from "../context"
-import { Alert } from "@mui/material"
+import { Alert, CircularProgress } from "@mui/material"
 import { Typography, IconButton, Divider } from '@mui/material';
 import { ChangeEnNumberToPer, NumberCommaSeperator, CalculateDiscount } from "../common"
 import { flow } from "lodash/fp"
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { AxiosProductInstance } from "../service"
-import { TProductResult } from "../state/actionTypes"
+import { IProductResult } from "../state/actionTypes"
 import { useRouter } from "next/router"
 
 interface ISearchResponse {
-    products: TProductResult[],
-    notFound: boolean
+    products: IProductResult[],
+    notFound: boolean,
 }
 function NavbarSearch() {
     const [textSearch, setTextSearch] = useState("")
+    const loading = useRef(false);
     const [responseData, setResponseData] = useState<ISearchResponse>();
     const { toggleScroll } = useContext(Context)
     const fomratMoney = flow(NumberCommaSeperator, ChangeEnNumberToPer);
     const router = useRouter();
 
     useEffect(() => {
-        SearchTerm()
+        loading.current = true;
+        SearchByTitle()
     }, [textSearch])
 
-    const SearchTerm = async () => {
+    const SearchByTitle = async () => {
         await AxiosProductInstance
-            .post<ISearchResponse>("SearchProductsInfo", { term: textSearch })
-            .then(({ data: { products, notFound } }) => setResponseData({ products, notFound }));
+            .post<ISearchResponse>("searchProductByTitle", { term: textSearch }, { headers: { 'Content-Type': 'application/json' } })
+            .then(({ data: { products, notFound } }) => { setResponseData({ products, notFound }) })
+            .then(() => loading.current = false);
     }
-
     const ConditionlRendering = () => {
-        if (responseData?.notFound) {
+        if (loading.current) {
+            return <CircularProgress color="inherit" />
+        }
+        else if (responseData?.notFound) {
             return <Alert variant='standard' severity='error' dir='rtl' >
                 موردی یافت نشد
             </Alert>
@@ -51,7 +56,6 @@ function NavbarSearch() {
                         <IconButton className={styles.button}>
                             <ShoppingCartCheckoutIcon />
                         </IconButton>
-
                     </div>
                     {responseData?.products && <Divider />}
                 </div>

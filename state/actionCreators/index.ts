@@ -14,7 +14,7 @@ export const fetchProducts = () => {
     dispatch({ type: ProductActionTypeEnum.LOADING })
 
     try {
-      let { data } = await AxiosProductInstance.get('GetProductsInfo')
+      let { data } = await AxiosProductInstance.get('products')
 
       if (data.length == 0) {
         dispatch({ type: ProductActionTypeEnum.NOT_FOUND, payload: [] })

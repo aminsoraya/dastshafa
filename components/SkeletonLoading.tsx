@@ -5,12 +5,19 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
-function SkeletonLoading({ itemCount }: { itemCount: number }) {
+interface ISkeletonArgument {
+    itemCount: number
+    lg?: number
+    md?: number
+    sm?: number
+    xs?: number
+}
+function SkeletonLoading({ itemCount, lg = 3, md = 4, sm = 6, xs = 12 }: ISkeletonArgument) {
     const Rendering = () => {
         let items = []
         for (var i = 0; i < itemCount; i++) {
             items[i] =
-                <Grid item lg={3} md={4} sm={6} xs={12} >
+                <Grid item lg={lg} md={md} sm={sm} xs={xs} >
                     <Card>
                         <Skeleton variant="rectangular" height={250} />
                         <CardContent>
