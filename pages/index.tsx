@@ -1,18 +1,15 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../sass/Home.module.scss'
 import Header from "../components/Header"
 import AdvertismentCard from "../components/AdvertismentCard"
-import { AxiosProductInstance } from "../service"
 import { IProductResult } from "../state/actionTypes"
-import { FC, useRef, useState, useEffect, RefObject } from "react"
+import { FC, useRef, useEffect, RefObject } from "react"
 import ProductsSummary from "../components/ProductsSummary"
-import Footer from "../components/Footer"
 import useOnScreen from "../hooks/useOnScreen"
 import dynamic from "next/dynamic"
 import { Grid } from "@mui/material"
 import SkeletonLoading from '../components/SkeletonLoading'
-import { MongoClient, WithId, Document, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
 const Articles = dynamic(() => import("../components/Articles"));
 
@@ -54,9 +51,7 @@ const Home: FC<IProducts> = ({ products, countAll }) => {
         }
       </div>
 
-      <footer className={styles.footer}>
-        <Footer />
-      </footer>
+
     </div>
   )
 }

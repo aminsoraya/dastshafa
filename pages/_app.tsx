@@ -10,6 +10,7 @@ import { Provider } from "react-redux"
 import { store, persistor } from "../state"
 import { ContextProvider } from "../context/ContextProvider"
 import { PersistGate } from 'redux-persist/integration/react';
+import Footer from "../components/Footer"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ContextProvider>
               {!ExcludePath.includes(router.pathname) && <Navbar />}
               <Component {...pageProps} />
+              {!ExcludePath.includes(router.pathname) && <footer className={styles.footer}>
+                <Footer />
+              </footer>}
             </ContextProvider>
           </ThemeProvider>
         </PersistGate>
