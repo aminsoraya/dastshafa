@@ -67,7 +67,7 @@ function Navbar() {
                             </Button></>
                         }
                         {cart?.length == 0 &&
-                            <Alert severity="error">
+                            <Alert severity="error" variant='outlined'>
                                 <AlertTitle></AlertTitle>
                                 سبد خرید شما خالی است
                             </Alert>
